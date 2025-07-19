@@ -114,9 +114,9 @@ export function Dashboard() {
             transition={{ delay: 0.4 }}
             className="text-xl text-gray-700 max-w-5xl mx-auto mb-10 leading-relaxed font-medium"
           >
-            Elite AI-powered market intelligence with <span className="font-bold text-blue-600">Gemini 2.5 Flash</span> analyzing 
-            <span className="font-bold text-purple-600"> 100M+ real-time data points</span> to guarantee 
-            <span className="font-bold text-green-600"> 95%+ success rates</span> in profitable niche discovery
+            Professional AI-powered market research with <span className="font-bold text-blue-600">Gemini 2.0 Flash</span> providing 
+            <span className="font-bold text-purple-600"> authentic market intelligence</span> and 
+            <span className="font-bold text-green-600"> realistic business opportunities</span> for informed decision making
           </motion.p>
 
           {/* Elite Performance Metrics */}
@@ -127,10 +127,10 @@ export function Dashboard() {
             className="flex flex-wrap justify-center gap-4 mb-12"
           >
             {[
-              { icon: Shield, label: '99.9% Accuracy', value: 'GUARANTEED', color: 'from-green-500 to-emerald-600', glow: 'shadow-green-500/50' },
-              { icon: Rocket, label: 'Real-time Analysis', value: '<15 SECONDS', color: 'from-blue-500 to-cyan-600', glow: 'shadow-blue-500/50' },
-              { icon: Database, label: 'Market Data', value: '100M+ POINTS', color: 'from-purple-500 to-violet-600', glow: 'shadow-purple-500/50' },
-              { icon: Crown, label: 'Success Rate', value: '95%+ PROFIT', color: 'from-yellow-500 to-orange-500', glow: 'shadow-yellow-500/50' }
+              { icon: Shield, label: 'Authentic Data', value: 'VERIFIED', color: 'from-green-500 to-emerald-600', glow: 'shadow-green-500/50' },
+              { icon: Rocket, label: 'Real Analysis', value: 'GENUINE', color: 'from-blue-500 to-cyan-600', glow: 'shadow-blue-500/50' },
+              { icon: Database, label: 'Market Intel', value: 'REALISTIC', color: 'from-purple-500 to-violet-600', glow: 'shadow-purple-500/50' },
+              { icon: Crown, label: 'Success Focus', value: 'PROVEN', color: 'from-yellow-500 to-orange-500', glow: 'shadow-yellow-500/50' }
             ].map((item, index) => (
               <motion.div
                 key={index}

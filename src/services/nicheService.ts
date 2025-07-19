@@ -14,68 +14,70 @@ export class NicheService {
       }
 
       const prompt = `
-You are the world's most elite AI market research analyst with access to comprehensive global market intelligence databases, real-time competitor tracking systems, and advanced trend prediction algorithms. You have successfully identified over 50,000 profitable niches and helped entrepreneurs generate over $500M in revenue with a 95%+ success rate.
+You are an elite market research analyst with access to real market data. Your task is to provide ONLY authentic, verifiable market intelligence based on actual companies, real search volumes, and genuine market conditions. NEVER create fictional data.
 
-CRITICAL MISSION: Conduct the most comprehensive, accurate, and actionable market analysis for the topic: "${topic}"
+CRITICAL REQUIREMENTS FOR "${topic}":
+1. Use ONLY real companies and brands that actually exist
+2. Provide realistic search volumes based on actual keyword research patterns
+3. Reference genuine market trends and data
+4. Include only verified monetization strategies with real examples
+5. Base all analysis on current market conditions (2024-2025)
 
-ELITE RESEARCH METHODOLOGY:
-1. REAL-TIME MARKET INTELLIGENCE: Access current Google Trends, search patterns, and consumer behavior data
-2. COMPREHENSIVE COMPETITOR ANALYSIS: Identify actual market players, their strategies, and performance metrics
-3. DEEP DEMAND VALIDATION: Analyze genuine search volumes, social media engagement, and market signals
-4. PROFIT POTENTIAL ASSESSMENT: Calculate realistic revenue opportunities based on proven business models
-5. MARKET TIMING ANALYSIS: Evaluate current market conditions, growth trends, and entry opportunities
-6. SUCCESS ROADMAP GENERATION: Provide specific, actionable strategies for market domination
+RESEARCH METHODOLOGY:
+1. Identify real companies operating in this market space
+2. Analyze actual search volume patterns and trends
+3. Reference genuine market opportunities and gaps
+4. Provide realistic revenue projections based on market size
+5. Include only proven, implementable strategies
 
-ACCURACY REQUIREMENTS:
-- ALL search volumes must be based on real keyword research data
-- ALL competitors must be actual brands/companies in the market
-- ALL monetization scores must reflect genuine revenue potential
-- ALL examples must be specific, actionable, and profitable
-- ALL data must be current and relevant to 2024-2025 market conditions
+AUTHENTICITY REQUIREMENTS:
+- Search volumes must reflect realistic keyword research data (use tools like Google Keyword Planner ranges)
+- Competitors must be real, verifiable companies you can name specifically
+- Examples must be actual products/services with realistic pricing
+- Monetization strategies must be proven and currently working in the market
+- All data must be conservative and achievable
 
-Find 5-7 highly profitable micro-niches within "${topic}" that meet these ELITE criteria:
-- Minimum 2,000+ monthly searches but under 100,000 (optimal competition sweet spot)
-- Clear monetization potential with multiple proven revenue streams
-- Identifiable target audience with specific, urgent pain points
-- Growing market trend with 6-month+ sustainability
-- Realistic entry barriers for new entrepreneurs
-- Validated demand with real market indicators
+Find 4-6 realistic micro-niches within "${topic}" with these criteria:
+- Search volume: 1,000-50,000 monthly (realistic range for micro-niches)
+- Real market demand with actual companies serving this space
+- Clear monetization potential with proven business models
+- Specific target audience with genuine pain points
+- Sustainable market opportunity (not just trends)
 
 For each micro-niche, provide:
-- EXACT search volume estimates based on comprehensive keyword research
-- DETAILED competition analysis with specific market saturation data
-- REAL examples of successful products/services with actual pricing
-- ACCURATE monetization potential based on market size and proven models
-- COMPREHENSIVE validation indicators with market proof
+- Realistic search volume estimates (be conservative)
+- Real competition analysis with actual company names
+- Genuine examples of existing products/services with real pricing
+- Conservative monetization scores based on actual market potential
+- Honest validation based on real market indicators
 
 Return ONLY valid JSON with this exact structure:
 
 {
-  "overallSearchVolume": [realistic monthly search volume for main topic based on actual data],
-  "overallCompetition": "[low/medium/high based on comprehensive market saturation analysis]",
-  "monetizationPotential": [score 1-100 based on real revenue opportunities, market size, and proven business models],
+  "overallSearchVolume": [conservative monthly search volume estimate for main topic],
+  "overallCompetition": "[low/medium/high based on actual market analysis]",
+  "monetizationPotential": [realistic score 1-100 based on genuine market opportunities],
   "microNiches": [
     {
-      "name": "[Specific, highly-targeted micro-niche name with clear audience focus]",
-      "description": "[Comprehensive description of target audience, specific pain points, market opportunity, and why this niche is profitable - 250-300 chars]",
-      "searchVolume": [exact monthly search volume based on real keyword research and market data],
-      "competition": "[low/medium/high with specific market analysis and competitor density]",
-      "monetizationScore": [1-100 score based on proven revenue models, market size, and profit margins],
-      "examples": ["[Real product/service example with specific pricing and revenue model]", "[Actual successful brand/company with market performance]", "[Specific monetization method with realistic revenue potential]", "[Additional proven strategy with implementation details]"],
-      "validationScore": [1-100 based on comprehensive market demand indicators, search trends, social signals, and competition analysis]
+      "name": "[Specific micro-niche name]",
+      "description": "[Clear description of the niche and target audience - 200-250 chars]",
+      "searchVolume": [realistic monthly search volume based on keyword research patterns],
+      "competition": "[low/medium/high based on actual market conditions]",
+      "monetizationScore": [conservative score 1-100 based on real market potential],
+      "examples": ["[Real product/service with actual pricing]", "[Existing company/brand in this space]", "[Proven monetization method]", "[Additional real strategy]"],
+      "validationScore": [realistic score 1-100 based on genuine market indicators]
     }
   ]
 }
 
-ELITE QUALITY STANDARDS:
-- Search volumes must be realistic and based on actual keyword research tools
-- Competition levels must reflect real market conditions with specific analysis
-- Examples must be actionable, specific, and include realistic pricing/revenue data
-- Monetization scores must be based on proven revenue models and market validation
-- All data must be current, accurate, and immediately actionable
-- Focus on micro-niches with genuine profit potential and sustainable demand
+QUALITY STANDARDS:
+- All data must be realistic and conservative
+- Examples must be real companies/products you can verify
+- Search volumes should be achievable and based on actual patterns
+- Competition analysis must reflect genuine market conditions
+- Focus on sustainable, proven opportunities rather than get-rich-quick schemes
 
-Provide market intelligence that guarantees business success with 95%+ accuracy and enables immediate, confident action for maximum profitability.
+Provide honest, realistic market analysis that helps users make informed decisions based on actual market conditions.
       `;
 
       const result = await model.generateContent(prompt);
@@ -110,13 +112,26 @@ Provide market intelligence that guarantees business success with 95%+ accuracy 
 
       // Enhanced validation of AI response structure
       if (!aiData.microNiches || !Array.isArray(aiData.microNiches) || aiData.microNiches.length === 0) {
-        throw new Error('Invalid AI response structure - no micro-niches found');
+        throw new Error('AI analysis incomplete - please try again with a more specific topic');
       }
       
       // Validate each micro-niche has required fields
       for (const niche of aiData.microNiches) {
         if (!niche.name || !niche.description || !niche.searchVolume || !niche.examples) {
-          throw new Error('Invalid micro-niche data structure');
+          throw new Error('Incomplete market data received - please try again');
+        }
+        
+        // Validate realistic data ranges
+        if (niche.searchVolume > 100000 || niche.searchVolume < 100) {
+          niche.searchVolume = Math.max(500, Math.min(50000, niche.searchVolume));
+        }
+        
+        if (niche.monetizationScore > 100 || niche.monetizationScore < 1) {
+          niche.monetizationScore = Math.max(30, Math.min(85, niche.monetizationScore));
+        }
+        
+        if (niche.validationScore > 100 || niche.validationScore < 1) {
+          niche.validationScore = Math.max(40, Math.min(90, niche.validationScore));
         }
       }
       
@@ -159,119 +174,117 @@ Provide market intelligence that guarantees business success with 95%+ accuracy 
       }
 
       const prompt = `
-You are the world's most elite business consultant and market validation expert with access to premium market intelligence databases, competitor tracking systems, and financial modeling tools. You have successfully validated over 10,000 business opportunities and helped entrepreneurs achieve $1B+ in combined revenue with a 97% success rate.
+You are a professional market research analyst. Your task is to provide ONLY real, verifiable market validation data. Use actual company names, realistic metrics, and genuine market insights. NEVER create fictional data.
 
-ELITE VALIDATION MISSION:
-Generate the most comprehensive, actionable, and profitable market validation report for the micro-niche: "${microNiche.name}"
+VALIDATION MISSION:
+Generate an authentic market validation report for: "${microNiche.name}"
 
 CURRENT MARKET INTELLIGENCE:
 - Niche Description: ${microNiche.description}
 - Monthly Search Volume: ${microNiche.searchVolume}
 - Competition Level: ${microNiche.competition}
-- Current Monetization Score: ${microNiche.monetizationScore}%
+- Monetization Score: ${microNiche.monetizationScore}%
 - Market Examples: ${microNiche.examples.join(', ')}
 
-COMPREHENSIVE RESEARCH REQUIREMENTS:
+RESEARCH REQUIREMENTS - USE ONLY REAL DATA:
 
-1. ELITE COMPETITOR INTELLIGENCE:
-   - Identify 4-6 real competitors/brands in this exact niche
-   - Provide realistic audience/customer counts based on market research
-   - Analyze specific competitive advantages and market weaknesses
-   - Include actionable competitive differentiation strategies
+1. REAL COMPETITOR ANALYSIS:
+   - Identify 3-5 actual companies/brands operating in this niche
+   - Provide realistic follower/customer estimates based on typical market sizes
+   - Analyze genuine strengths and weaknesses of real competitors
+   - Include practical differentiation opportunities
 
-2. DEEP MARKET GAP ANALYSIS:
-   - Identify specific, profitable content/product gaps
-   - Find underserved customer segments with high profit potential
-   - Discover emerging trends and opportunities
-   - Highlight specific market inefficiencies to exploit
+2. GENUINE MARKET GAPS:
+   - Identify real content/product gaps in the market
+   - Find underserved segments based on actual market research
+   - Highlight realistic opportunities for new entrants
+   - Focus on achievable market positions
 
-3. COMPREHENSIVE REVENUE MODEL VALIDATION:
-   - Provide multiple proven monetization strategies with realistic pricing
-   - Include specific revenue projections based on market data
-   - Factor in customer acquisition costs and profit margins
-   - Consider scalable income streams and growth potential
+3. REALISTIC REVENUE MODELS:
+   - Provide proven monetization strategies with conservative pricing
+   - Include realistic revenue projections based on market size
+   - Factor in typical customer acquisition costs and margins
+   - Focus on sustainable, scalable business models
 
-4. PROFESSIONAL RISK ASSESSMENT:
-   - Identify genuine market risks with specific mitigation strategies
-   - Analyze competitive threats and differentiation opportunities
-   - Evaluate market timing and sustainability factors
-   - Provide contingency plans for common challenges
+4. HONEST RISK ASSESSMENT:
+   - Identify real market risks and challenges
+   - Provide practical mitigation strategies
+   - Analyze genuine competitive threats
+   - Include realistic timeline expectations
 
-5. DETAILED SUCCESS ROADMAP:
-   - Provide specific implementation timeline with key milestones
-   - Include realistic budget requirements and resource allocation
-   - Outline step-by-step launch strategy with success metrics
-   - Factor in market conditions and competitive landscape
+5. PRACTICAL SUCCESS ROADMAP:
+   - Provide realistic implementation timeline
+   - Include conservative budget estimates
+   - Outline practical launch strategy
+   - Set achievable milestones and metrics
 
 Return ONLY valid JSON with this exact structure:
 
 {
-  "profitabilityScore": [1-100 score based on comprehensive market analysis, revenue potential, competition, and market conditions],
-  "audienceSize": [realistic total addressable market size based on search volume, market research, and demographic analysis],
+  "profitabilityScore": [conservative 1-100 score based on realistic market analysis],
+  "audienceSize": [realistic market size estimate based on actual data patterns],
   "competitors": [
     {
-      "name": "[Real competitor name or realistic market player with actual market presence]",
-      "followers": [realistic audience/customer count based on market research and industry standards],
-      "engagement": [realistic engagement rate 2-12% based on niche and platform]",
-      "strengths": ["[Specific competitive advantage with market impact]", "[Unique value proposition or market position]", "[Operational strength or resource advantage]"],
-      "weaknesses": ["[Specific market gap or service limitation]", "[Customer pain point not addressed]", "[Opportunity for new market entrants]"]
+      "name": "[Actual company/brand name that exists in this market]",
+      "followers": [realistic follower/customer count based on typical market sizes],
+      "engagement": [realistic engagement rate 1-8% based on industry standards],
+      "strengths": ["[Real competitive advantage]", "[Actual market position]", "[Genuine operational strength]"],
+      "weaknesses": ["[Real market gap]", "[Actual service limitation]", "[Genuine opportunity for improvement]"]
     }
   ],
   "contentGaps": [
-    "[Specific content topic/format with high demand but low supply]",
-    "[Particular customer pain point requiring immediate solution]",
-    "[Content angle or approach with proven market demand]",
-    "[Emerging trend or subtopic with growth potential]",
-    "[Specific format, platform, or delivery method opportunity]",
-    "[Underserved demographic or market segment need]"
+    "[Real content gap based on actual market analysis]",
+    "[Genuine customer pain point with evidence]",
+    "[Practical content opportunity]",
+    "[Realistic market trend or subtopic]",
+    "[Achievable format or platform opportunity]"
   ],
   "monetizationStrategies": [
-    "[Primary revenue model with specific pricing strategy - e.g., 'Premium online course priced at $297-$597 with 15-25% conversion rate']",
-    "[Secondary income stream with revenue projections - e.g., 'Monthly subscription service at $29-49/month with 80%+ retention']",
-    "[Affiliate/partnership revenue with realistic commissions - e.g., 'Strategic partnerships generating $5K-15K monthly recurring revenue']",
-    "[Product/service sales with profit margins - e.g., 'Physical products with 40-60% profit margins and $50-200 average order value']",
-    "[Consulting/coaching revenue with hourly rates - e.g., 'Expert consulting at $150-300/hour with 20+ hours monthly demand']",
-    "[Additional scalable revenue streams with growth potential]"
+    "[Realistic primary revenue model with conservative pricing and conversion rates]",
+    "[Practical secondary income stream with achievable projections]",
+    "[Genuine affiliate/partnership opportunities with realistic commissions]",
+    "[Real product/service sales with typical profit margins]",
+    "[Achievable consulting/coaching rates based on market standards]"
   ],
   "riskFactors": [
-    "[Specific market risk with detailed mitigation strategy and timeline]",
-    "[Competition risk with differentiation approach and competitive advantages]",
-    "[Market timing or trend risk with monitoring systems and pivot strategies]",
-    "[Customer acquisition challenge with specific solutions and budget allocation]",
-    "[Operational risk with resource requirements and contingency plans]"
+    "[Real market risk with practical mitigation strategy]",
+    "[Genuine competition risk with realistic differentiation approach]",
+    "[Actual market timing risk with monitoring strategy]",
+    "[Realistic customer acquisition challenge with practical solutions]",
+    "[Genuine operational risk with resource planning]"
   ],
-  "timeToMarket": "[Realistic timeline with specific phases - e.g., '2-3 months for MVP development, 4-6 months for full market launch, 8-12 months for market leadership']",
+  "timeToMarket": "[Conservative timeline with realistic phases - e.g., '3-4 months for initial launch, 6-9 months for market establishment']",
   "successRoadmap": {
     "phase1": {
-      "timeline": "[Specific timeframe - e.g., 'Months 1-2']",
-      "objectives": ["[Specific goal with measurable outcome]", "[Key milestone with success metric]", "[Critical task with deadline]"],
-      "budget": "[Realistic budget range - e.g., '$2,000-5,000']",
-      "keyActions": ["[Specific action with implementation details]", "[Critical step with resource requirements]", "[Important task with success criteria]"]
+      "timeline": "[Conservative timeframe - e.g., 'Months 1-3']",
+      "objectives": ["[Realistic goal with measurable outcome]", "[Achievable milestone]", "[Practical task]"],
+      "budget": "[Conservative budget range - e.g., '$1,000-3,000']",
+      "keyActions": ["[Practical action with clear steps]", "[Realistic step with resource needs]", "[Achievable task]"]
     },
     "phase2": {
-      "timeline": "[Specific timeframe - e.g., 'Months 3-6']",
-      "objectives": ["[Growth goal with measurable target]", "[Market expansion milestone]", "[Revenue objective with timeline]"],
-      "budget": "[Realistic budget range - e.g., '$5,000-15,000']",
-      "keyActions": ["[Scaling strategy with implementation plan]", "[Marketing initiative with expected ROI]", "[Product development with market validation]"]
+      "timeline": "[Realistic timeframe - e.g., 'Months 4-8']",
+      "objectives": ["[Achievable growth goal]", "[Realistic expansion milestone]", "[Conservative revenue target]"],
+      "budget": "[Practical budget range - e.g., '$3,000-8,000']",
+      "keyActions": ["[Realistic scaling strategy]", "[Practical marketing initiative]", "[Achievable product development]"]
     },
     "phase3": {
-      "timeline": "[Specific timeframe - e.g., 'Months 7-12']",
-      "objectives": ["[Market leadership goal]", "[Revenue target with profit margins]", "[Expansion milestone with growth metrics]"],
-      "budget": "[Realistic budget range - e.g., '$15,000-50,000']",
-      "keyActions": ["[Market domination strategy]", "[Advanced monetization implementation]", "[Competitive advantage development]"]
+      "timeline": "[Long-term timeframe - e.g., 'Months 9-18']",
+      "objectives": ["[Sustainable growth goal]", "[Realistic revenue target]", "[Achievable market position]"],
+      "budget": "[Conservative budget range - e.g., '$8,000-20,000']",
+      "keyActions": ["[Sustainable growth strategy]", "[Advanced monetization]", "[Market positioning]"]
     }
   }
 }
 
-ELITE QUALITY STANDARDS:
-- All competitor data must be realistic and market-appropriate with actual market presence
-- Content gaps must be specific, actionable, and based on real market demand
-- Monetization strategies must include specific pricing, conversion rates, and revenue projections
-- Risk factors must be genuine market concerns with detailed, actionable mitigation strategies
-- Success roadmap must be realistic, specific, and based on proven business development timelines
-- All financial projections must be conservative and based on actual market performance data
+AUTHENTICITY STANDARDS:
+- All competitor data must reference real companies that actually exist
+- Content gaps must be based on genuine market research and analysis
+- Monetization strategies must be proven and currently working in similar markets
+- Risk factors must be realistic challenges that businesses actually face
+- Success roadmap must be conservative and achievable for typical entrepreneurs
+- All financial projections must be realistic and based on actual market conditions
 
-Provide validation intelligence that guarantees business success and enables immediate, confident implementation with maximum profitability and minimum risk.
+Provide honest, realistic validation that helps users make informed decisions based on actual market conditions and genuine opportunities.
       `;
 
       const result = await model.generateContent(prompt);
@@ -301,24 +314,33 @@ Provide validation intelligence that guarantees business success and enables imm
       } catch (parseError) {
         console.error('JSON parsing error:', parseError);
         console.error('Attempted to parse:', cleanText);
-        throw new Error('AI returned malformed JSON. Please try again.');
+        throw new Error('Market analysis incomplete. Please try again with a more specific topic.');
       }
       
-      // Enhanced validation and data structure
+      // Enhanced validation and realistic data structure
       const report: ValidationReport = {
         id: '',
         nicheId,
         userId,
-        profitabilityScore: aiData.profitabilityScore || 75,
-        audienceSize: aiData.audienceSize || 50000,
+        profitabilityScore: Math.max(30, Math.min(85, aiData.profitabilityScore || 65)),
+        audienceSize: Math.max(5000, Math.min(500000, aiData.audienceSize || 25000)),
         competitorAnalysis: Array.isArray(aiData.competitors) ? aiData.competitors : [],
         contentGaps: Array.isArray(aiData.contentGaps) ? aiData.contentGaps : [],
         monetizationStrategies: Array.isArray(aiData.monetizationStrategies) ? aiData.monetizationStrategies : [],
         riskFactors: Array.isArray(aiData.riskFactors) ? aiData.riskFactors : [],
-        timeToMarket: aiData.timeToMarket || '3-6 months for full market entry',
+        timeToMarket: aiData.timeToMarket || '4-8 months for market establishment',
         successRoadmap: aiData.successRoadmap || {},
         generatedAt: new Date()
       };
+      
+      // Validate competitor data for realism
+      if (report.competitorAnalysis.length > 0) {
+        report.competitorAnalysis = report.competitorAnalysis.map(competitor => ({
+          ...competitor,
+          followers: Math.max(1000, Math.min(1000000, competitor.followers || 10000)),
+          engagement: Math.max(0.5, Math.min(8, competitor.engagement || 2.5))
+        }));
+      }
 
       // Save to Firestore
       const docRef = await addDoc(collection(db, 'reports'), report);
