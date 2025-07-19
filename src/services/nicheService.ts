@@ -189,7 +189,9 @@ CURRENT MARKET INTELLIGENCE:
 RESEARCH REQUIREMENTS - USE ONLY REAL DATA:
 
 1. REAL COMPETITOR ANALYSIS:
-   - Identify 3-5 actual companies/brands operating in this niche
+   - Identify 2-3 actual companies/brands operating in this niche (MUST BE REAL)
+   - Provide their official website URLs
+   - Include their verified social media profiles (Instagram, Twitter, Facebook, LinkedIn, YouTube)
    - Provide realistic follower/customer estimates based on typical market sizes
    - Analyze genuine strengths and weaknesses of real competitors
    - Include practical differentiation opportunities

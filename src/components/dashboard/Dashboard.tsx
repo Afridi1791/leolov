@@ -80,31 +80,15 @@ export function Dashboard() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          {/* Elite Badge */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-yellow-400 via-yellow-500 to-orange-500 text-white text-sm font-bold mb-8 shadow-2xl border-2 border-yellow-300"
-          >
-            <Crown className="w-6 h-6 mr-2" />
-            WORLD'S #1 PROFITABLE NICHE FINDER
-            <Star className="w-6 h-6 ml-2 fill-current" />
-          </motion.div>
-          
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black text-gray-900 mb-8 leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight"
           >
-            Discover Your Next{' '}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
-              Million-Dollar
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
-              Niche Empire
+            AI-Powered{' '}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Niche Discovery
             </span>
           </motion.h1>
           
@@ -114,41 +98,8 @@ export function Dashboard() {
             transition={{ delay: 0.4 }}
             className="text-xl text-gray-700 max-w-5xl mx-auto mb-10 leading-relaxed font-medium"
           >
-            Professional AI-powered market research with <span className="font-bold text-blue-600">Gemini 2.0 Flash</span> providing 
-            <span className="font-bold text-purple-600"> authentic market intelligence</span> and 
-            <span className="font-bold text-green-600"> realistic business opportunities</span> for informed decision making
+            Professional AI-powered market research providing authentic market intelligence and realistic business opportunities for informed decision making
           </motion.p>
-
-          {/* Elite Performance Metrics */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
-          >
-            {[
-              { icon: Shield, label: 'Authentic Data', value: 'VERIFIED', color: 'from-green-500 to-emerald-600', glow: 'shadow-green-500/50' },
-              { icon: Rocket, label: 'Real Analysis', value: 'GENUINE', color: 'from-blue-500 to-cyan-600', glow: 'shadow-blue-500/50' },
-              { icon: Database, label: 'Market Intel', value: 'REALISTIC', color: 'from-purple-500 to-violet-600', glow: 'shadow-purple-500/50' },
-              { icon: Crown, label: 'Success Focus', value: 'PROVEN', color: 'from-yellow-500 to-orange-500', glow: 'shadow-yellow-500/50' }
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className={`relative group cursor-pointer`}
-              >
-                <div className={`flex flex-col items-center px-6 py-4 rounded-2xl bg-gradient-to-r ${item.color} text-white font-bold shadow-2xl ${item.glow} border border-white/20 backdrop-blur-sm`}>
-                  <item.icon className="w-8 h-8 mb-2 group-hover:animate-pulse" />
-                  <div className="text-xs opacity-90 mb-1">{item.label}</div>
-                  <div className="text-sm font-black">{item.value}</div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.div>
-            ))}
-          </motion.div>
         </motion.div>
 
         {/* Enhanced AI Analysis Status with Professional Design */}
@@ -232,43 +183,43 @@ export function Dashboard() {
           {[
             { 
               icon: Brain, 
-              label: 'AI Intelligence', 
-              value: 'Gemini 2.5', 
-              subtitle: 'Flash Model',
+              label: 'AI Model', 
+              value: 'Gemini', 
+              subtitle: 'Flash',
               color: 'from-blue-500 to-blue-600',
               bgColor: 'from-blue-50 to-blue-100',
-              description: 'Latest AI technology',
-              trend: '+300% accuracy'
+              description: 'Advanced AI analysis',
+              trend: 'Real-time data'
             },
             { 
               icon: Target, 
-              label: 'Success Rate', 
-              value: '99.9%', 
-              subtitle: 'Guaranteed',
+              label: 'Analysis Quality', 
+              value: 'High', 
+              subtitle: 'Accuracy',
               color: 'from-green-500 to-green-600',
               bgColor: 'from-green-50 to-green-100',
-              description: 'Profitable niche discovery',
-              trend: '+15% this month'
+              description: 'Detailed market research',
+              trend: 'Comprehensive data'
             },
             { 
               icon: Zap, 
               label: 'Analysis Speed', 
-              value: '< 15', 
+              value: 'Fast', 
               subtitle: 'Seconds',
               color: 'from-purple-500 to-purple-600',
               bgColor: 'from-purple-50 to-purple-100',
-              description: 'Lightning-fast insights',
-              trend: '10x faster'
+              description: 'Quick insights',
+              trend: 'Efficient processing'
             },
             { 
               icon: DollarSign, 
-              label: 'Avg. ROI', 
-              value: '450%', 
-              subtitle: 'Return',
+              label: 'Market Focus', 
+              value: 'Profit', 
+              subtitle: 'Oriented',
               color: 'from-yellow-500 to-orange-500',
               bgColor: 'from-yellow-50 to-orange-100',
-              description: 'Average profit return',
-              trend: '+25% growth'
+              description: 'Revenue potential analysis',
+              trend: 'Business focused'
             }
           ].map((stat, index) => (
             <motion.div
@@ -321,94 +272,6 @@ export function Dashboard() {
             <NicheResults nicheData={currentNiche} />
           </div>
         </div>
-
-        {/* Elite Success Stories Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0 }}
-          className="mt-20 relative overflow-hidden bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 rounded-3xl p-10 text-white shadow-2xl"
-        >
-          {/* Animated Background */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 animate-pulse"></div>
-          
-          <div className="relative z-10">
-            <div className="text-center mb-12">
-              <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white font-bold mb-6">
-                <Award className="w-6 h-6 mr-2" />
-                ELITE SUCCESS STORIES
-                <Star className="w-6 h-6 ml-2 fill-current" />
-              </div>
-              <h3 className="text-3xl font-bold mb-4">Real Entrepreneurs, Real Million-Dollar Results</h3>
-              <p className="text-blue-200 text-lg">Our AI-powered niche discovery has generated over $50M+ in revenue</p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { 
-                  name: "Sarah K.", 
-                  niche: "Eco-friendly Pet Products", 
-                  revenue: "$1.2M", 
-                  time: "8 months",
-                  growth: "+340%",
-                  avatar: "🌱"
-                },
-                { 
-                  name: "Mike R.", 
-                  niche: "AI-Powered Productivity Tools", 
-                  revenue: "$890K", 
-                  time: "6 months",
-                  growth: "+280%",
-                  avatar: "🤖"
-                },
-                { 
-                  name: "Lisa M.", 
-                  niche: "Mindful Parenting Solutions", 
-                  revenue: "$1.5M", 
-                  time: "10 months",
-                  growth: "+420%",
-                  avatar: "🧘"
-                }
-              ].map((story, index) => (
-                <motion.div 
-                  key={index}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="relative group"
-                >
-                  <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:border-white/40 transition-all duration-300">
-                    <div className="text-center mb-6">
-                      <div className="text-4xl mb-4">{story.avatar}</div>
-                      <div className="text-xl font-bold mb-2">{story.name}</div>
-                      <div className="text-blue-200 mb-4">{story.niche}</div>
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-300">Revenue:</span>
-                        <span className="text-green-400 font-bold text-xl">{story.revenue}</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-300">Timeline:</span>
-                        <span className="text-blue-400 font-semibold">{story.time}</span>
-                      </div>
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-300">Growth:</span>
-                        <span className="text-purple-400 font-bold">{story.growth}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-6 pt-4 border-t border-white/20">
-                      <div className="flex items-center justify-center text-sm text-yellow-400">
-                        <Star className="w-4 h-4 mr-1 fill-current" />
-                        <span className="font-semibold">Verified Success</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

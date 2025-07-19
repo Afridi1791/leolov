@@ -83,6 +83,14 @@ export interface ValidationReport {
 
 export interface CompetitorData {
   name: string;
+  website: string;
+  socialMedia: {
+    instagram?: string;
+    twitter?: string;
+    facebook?: string;
+    linkedin?: string;
+    youtube?: string;
+  };
   followers: number;
   engagement: number;
   strengths: string[];
