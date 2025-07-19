@@ -298,6 +298,58 @@ export function ReportsPage() {
                 </div>
               </div>
 
+              {selectedReport.successRoadmap && (
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Success Roadmap</h4>
+                  <div className="space-y-6">
+                    {Object.entries(selectedReport.successRoadmap).map(([phase, data], index) => (
+                      <div key={phase} className="border border-gray-200 rounded-lg p-6">
+                        <div className="flex items-center mb-4">
+                          <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-3">
+                            {index + 1}
+                          </div>
+                          <div>
+                            <h5 className="font-semibold text-gray-900 capitalize">{phase.replace('phase', 'Phase ')}</h5>
+                            <p className="text-sm text-gray-600">{data.timeline}</p>
+                          </div>
+                          <div className="ml-auto">
+                            <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                              {data.budget}
+                            </span>
+                          </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div>
+                            <h6 className="font-medium text-gray-900 mb-2">Objectives</h6>
+                            <ul className="space-y-1">
+                              {data.objectives?.map((objective, idx) => (
+                                <li key={idx} className="text-sm text-gray-600 flex items-start">
+                                  <span className="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                                  {objective}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          
+                          <div>
+                            <h6 className="font-medium text-gray-900 mb-2">Key Actions</h6>
+                            <ul className="space-y-1">
+                              {data.keyActions?.map((action, idx) => (
+                                <li key={idx} className="text-sm text-gray-600 flex items-start">
+                                  <span className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                                  {action}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Actions */}
               <div className="flex justify-end space-x-4 pt-4 border-t border-gray-200">
                 <Button

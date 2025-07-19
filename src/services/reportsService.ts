@@ -208,6 +208,67 @@ export class ReportsService {
         yPosition += 8;
       });
 
+      // Success Roadmap
+      if (report.successRoadmap && Object.keys(report.successRoadmap).length > 0) {
+        if (yPosition > pageHeight - 60) {
+          pdf.addPage();
+          yPosition = 20;
+        }
+
+        yPosition += 10;
+        pdf.setFontSize(16);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('Success Roadmap', 20, yPosition);
+        yPosition += 15;
+
+        Object.entries(report.successRoadmap).forEach(([phase, data], index) => {
+          if (yPosition > pageHeight - 80) {
+            pdf.addPage();
+            yPosition = 20;
+          }
+
+          pdf.setFontSize(14);
+          pdf.setFont('helvetica', 'bold');
+          pdf.text(`${phase.replace('phase', 'Phase ').toUpperCase()}`, 20, yPosition);
+          yPosition += 8;
+          
+          pdf.setFontSize(12);
+          pdf.setFont('helvetica', 'normal');
+          pdf.text(`Timeline: ${data.timeline}`, 25, yPosition);
+          yPosition += 6;
+          pdf.text(`Budget: ${data.budget}`, 25, yPosition);
+          yPosition += 10;
+          
+          pdf.setFont('helvetica', 'bold');
+          pdf.text('Objectives:', 25, yPosition);
+          yPosition += 6;
+          pdf.setFont('helvetica', 'normal');
+          data.objectives?.forEach(objective => {
+            if (yPosition > pageHeight - 20) {
+              pdf.addPage();
+              yPosition = 20;
+            }
+            pdf.text(`• ${objective}`, 30, yPosition);
+            yPosition += 6;
+          });
+          
+          yPosition += 4;
+          pdf.setFont('helvetica', 'bold');
+          pdf.text('Key Actions:', 25, yPosition);
+          yPosition += 6;
+          pdf.setFont('helvetica', 'normal');
+          data.keyActions?.forEach(action => {
+            if (yPosition > pageHeight - 20) {
+              pdf.addPage();
+              yPosition = 20;
+            }
+            pdf.text(`• ${action}`, 30, yPosition);
+            yPosition += 6;
+          });
+          yPosition += 10;
+        });
+      }
+
       // Footer
       const totalPages = pdf.internal.getNumberOfPages();
       for (let i = 1; i <= totalPages; i++) {

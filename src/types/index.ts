@@ -58,6 +58,26 @@ export interface ValidationReport {
   monetizationStrategies: string[];
   riskFactors: string[];
   timeToMarket: string;
+  successRoadmap?: {
+    phase1?: {
+      timeline: string;
+      objectives: string[];
+      budget: string;
+      keyActions: string[];
+    };
+    phase2?: {
+      timeline: string;
+      objectives: string[];
+      budget: string;
+      keyActions: string[];
+    };
+    phase3?: {
+      timeline: string;
+      objectives: string[];
+      budget: string;
+      keyActions: string[];
+    };
+  };
   generatedAt: Date;
 }
 
