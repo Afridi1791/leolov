@@ -10,7 +10,7 @@ let genAI = new GoogleGenerativeAI(API_KEY);
 
 // Upgraded to Gemini 2.5 Flash for maximum accuracy and deep market analysis
 let model = genAI.getGenerativeModel({ 
-  model: "gemini-2.0-flash-exp", // Using latest available model
+  model: "gemini-1.5-flash", // Using Gemini 1.5 Flash (most stable available)
   generationConfig: {
     temperature: 0.1, // Ultra-low temperature for maximum accuracy and factual responses
     topK: 10,
@@ -36,7 +36,7 @@ export const updateApiKey = (newApiKey: string) => {
   API_KEY = newApiKey;
   genAI = new GoogleGenerativeAI(API_KEY);
   model = genAI.getGenerativeModel({ 
-    model: "gemini-2.0-flash-exp",
+    model: "gemini-1.5-flash",
     generationConfig: {
       temperature: 0.1,
       topK: 10,

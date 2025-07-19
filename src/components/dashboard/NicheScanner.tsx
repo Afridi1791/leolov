@@ -11,7 +11,8 @@ import {
   Globe,
   Rocket,
   Shield,
-  Award
+  Award,
+  DollarSign
 } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
