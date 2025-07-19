@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Card } from '../ui/Card';
 import { NicheData } from '../../types';
@@ -12,8 +11,8 @@ interface DemandHeatmapProps {
 export function DemandHeatmap({ nicheData }: DemandHeatmapProps) {
   if (!nicheData) {
     return (
-      <Card className="p-6">
-        <div className="text-center text-gray-500">
+      <Card>
+        <div className="text-center text-gray-500 py-12">
           <TrendingUp className="w-12 h-12 mx-auto mb-4 opacity-50" />
           <p>Run a niche analysis to see the demand heatmap</p>
         </div>
@@ -22,7 +21,7 @@ export function DemandHeatmap({ nicheData }: DemandHeatmapProps) {
   }
 
   const heatmapData = nicheData.microNiches.map((niche, index) => ({
-    name: niche.name.length > 20 ? niche.name.substring(0, 20) + '...' : niche.name,
+    name: niche.name.length > 15 ? niche.name.substring(0, 15) + '...' : niche.name,
     fullName: niche.name,
     searchVolume: niche.searchVolume,
     monetization: niche.monetizationScore,
@@ -31,10 +30,10 @@ export function DemandHeatmap({ nicheData }: DemandHeatmapProps) {
   }));
 
   const getColor = (value: number) => {
-    if (value >= 80) return '#10B981'; // Green
-    if (value >= 60) return '#F59E0B'; // Yellow
-    if (value >= 40) return '#EF4444'; // Red
-    return '#6B7280'; // Gray
+    if (value >= 80) return '#10B981';
+    if (value >= 60) return '#F59E0B';
+    if (value >= 40) return '#EF4444';
+    return '#6B7280';
   };
 
   const stats = [
@@ -73,52 +72,45 @@ export function DemandHeatmap({ nicheData }: DemandHeatmapProps) {
       {/* Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((stat, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-          >
-            <Card className="p-4">
-              <div className="flex items-center">
-                <div className={`w-10 h-10 rounded-lg ${stat.bgColor} flex items-center justify-center mr-3`}>
-                  <stat.icon className={`w-5 h-5 ${stat.color}`} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-600">{stat.label}</p>
-                  <p className="text-xl font-bold text-gray-900">{stat.value}</p>
-                </div>
+          <Card key={index} padding="sm">
+            <div className="flex items-center">
+              <div className={`w-8 h-8 rounded-lg ${stat.bgColor} flex items-center justify-center mr-3`}>
+                <stat.icon className={`w-4 h-4 ${stat.color}`} />
               </div>
-            </Card>
-          </motion.div>
+              <div>
+                <p className="text-xs text-gray-600">{stat.label}</p>
+                <p className="text-lg font-bold text-gray-900">{stat.value}</p>
+              </div>
+            </div>
+          </Card>
         ))}
       </div>
 
       {/* Heatmap Chart */}
-      <Card className="p-6">
+      <Card>
         <div className="mb-4">
           <h3 className="text-lg font-semibold text-gray-900 mb-2">Micro-Niche Analysis</h3>
-          <p className="text-gray-600">Monetization potential vs validation score for each micro-niche</p>
+          <p className="text-gray-600">Monetization potential for each micro-niche</p>
         </div>
 
-        <div className="h-80">
+        <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={heatmapData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <BarChart data={heatmapData} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis 
                 dataKey="name" 
                 angle={-45}
                 textAnchor="end"
-                height={80}
+                height={60}
                 fontSize={12}
               />
               <YAxis />
               <Tooltip 
-                content={({ active, payload, label }) => {
+                content={({ active, payload }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
+                      <div className="bg-white p-3 rounded-lg shadow-lg border">
                         <p className="font-semibold text-gray-900">{data.fullName}</p>
                         <p className="text-sm text-gray-600">Search Volume: {data.searchVolume.toLocaleString()}</p>
                         <p className="text-sm text-gray-600">Monetization: {data.monetization}%</p>
@@ -138,18 +130,18 @@ export function DemandHeatmap({ nicheData }: DemandHeatmapProps) {
           </ResponsiveContainer>
         </div>
 
-        <div className="mt-4 flex items-center justify-center space-x-6 text-sm">
+        <div className="mt-4 flex items-center justify-center space-x-4 text-sm">
           <div className="flex items-center">
             <div className="w-3 h-3 bg-green-500 rounded mr-2"></div>
-            <span>High Potential (80%+)</span>
+            <span>High (80%+)</span>
           </div>
           <div className="flex items-center">
             <div className="w-3 h-3 bg-yellow-500 rounded mr-2"></div>
-            <span>Medium Potential (60-79%)</span>
+            <span>Medium (60-79%)</span>
           </div>
           <div className="flex items-center">
             <div className="w-3 h-3 bg-red-500 rounded mr-2"></div>
-            <span>Low Potential (40-59%)</span>
+            <span>Low (40-59%)</span>
           </div>
         </div>
       </Card>
