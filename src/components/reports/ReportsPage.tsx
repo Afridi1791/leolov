@@ -218,41 +218,6 @@ export function ReportsPage() {
                 </div>
               </div>
 
-              {/* Competitor Analysis */}
-              <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-4">Competitor Analysis</h4>
-                <div className="space-y-4">
-                  {selectedReport.competitorAnalysis.map((competitor, index) => (
-                    <div key={index} className="border border-gray-200 rounded-lg p-4">
-                      <div className="flex items-center justify-between mb-3">
-                        <h5 className="font-medium text-gray-900">{competitor.name}</h5>
-                        <div className="text-sm text-gray-600">
-                          {competitor.followers.toLocaleString()} followers • {competitor.engagement}% engagement
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <p className="text-sm font-medium text-green-600 mb-2">Strengths</p>
-                          <ul className="text-sm text-gray-600 space-y-1">
-                            {competitor.strengths.map((strength, idx) => (
-                              <li key={idx}>• {strength}</li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-red-600 mb-2">Weaknesses</p>
-                          <ul className="text-sm text-gray-600 space-y-1">
-                            {competitor.weaknesses.map((weakness, idx) => (
-                              <li key={idx}>• {weakness}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* Content Gaps */}
               <div>
                 <h4 className="text-lg font-semibold text-gray-900 mb-4">Content Gaps</h4>
@@ -349,6 +314,77 @@ export function ReportsPage() {
                   </div>
                 </div>
               )}
+
+              {/* Competitor Analysis - Moved to Bottom */}
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">Competitor Analysis</h4>
+                <div className="space-y-4">
+                  {selectedReport.competitorAnalysis.map((competitor, index) => (
+                    <div key={index} className="border border-gray-200 rounded-lg p-4">
+                      <div className="flex items-center justify-between mb-3">
+                        <h5 className="font-medium text-gray-900">{competitor.name}</h5>
+                        <div className="text-sm text-gray-600">
+                          {competitor.followers.toLocaleString()} followers • {competitor.engagement}% engagement
+                        </div>
+                      </div>
+                      
+                      {/* Website and Social Media Links */}
+                      <div className="mb-4 p-3 bg-gray-50 rounded-lg">
+                        <h6 className="font-medium text-gray-900 mb-2">Online Presence</h6>
+                        <div className="space-y-2">
+                          {competitor.website && (
+                            <div className="flex items-center">
+                              <span className="text-sm font-medium text-gray-600 w-20">Website:</span>
+                              <a 
+                                href={competitor.website} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="text-blue-600 hover:text-blue-800 text-sm underline"
+                              >
+                                {competitor.website}
+                              </a>
+                            </div>
+                          )}
+                          {competitor.socialMedia && Object.entries(competitor.socialMedia).map(([platform, url]) => (
+                            url && (
+                              <div key={platform} className="flex items-center">
+                                <span className="text-sm font-medium text-gray-600 w-20 capitalize">{platform}:</span>
+                                <a 
+                                  href={url} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="text-blue-600 hover:text-blue-800 text-sm underline"
+                                >
+                                  {url}
+                                </a>
+                              </div>
+                            )
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm font-medium text-green-600 mb-2">Strengths</p>
+                          <ul className="text-sm text-gray-600 space-y-1">
+                            {competitor.strengths.map((strength, idx) => (
+                              <li key={idx}>• {strength}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-red-600 mb-2">Weaknesses</p>
+                          <ul className="text-sm text-gray-600 space-y-1">
+                            {competitor.weaknesses.map((weakness, idx) => (
+                              <li key={idx}>• {weakness}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               {/* Actions */}
               <div className="flex justify-end space-x-4 pt-4 border-t border-gray-200">

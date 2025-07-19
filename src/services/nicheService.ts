@@ -189,9 +189,9 @@ CURRENT MARKET INTELLIGENCE:
 RESEARCH REQUIREMENTS - USE ONLY REAL DATA:
 
 1. REAL COMPETITOR ANALYSIS:
-   - Identify 2-3 actual companies/brands operating in this niche (MUST BE REAL)
-   - Provide their official website URLs
-   - Include their verified social media profiles (Instagram, Twitter, Facebook, LinkedIn, YouTube)
+   - Identify 2-3 actual companies/brands operating in this niche (MUST BE REAL AND VERIFIABLE)
+   - Provide their official website URLs (must be working, real websites)
+   - Include their verified social media profiles with full URLs (Instagram, Twitter, Facebook, LinkedIn, YouTube)
    - Provide realistic follower/customer estimates based on typical market sizes
    - Analyze genuine strengths and weaknesses of real competitors
    - Include practical differentiation opportunities
@@ -228,6 +228,14 @@ Return ONLY valid JSON with this exact structure:
   "competitors": [
     {
       "name": "[Actual company/brand name that exists in this market]",
+      "website": "[Real, working website URL - e.g., https://example.com]",
+      "socialMedia": {
+        "instagram": "[Real Instagram URL if exists - e.g., https://instagram.com/username]",
+        "twitter": "[Real Twitter URL if exists - e.g., https://twitter.com/username]",
+        "facebook": "[Real Facebook URL if exists - e.g., https://facebook.com/username]",
+        "linkedin": "[Real LinkedIn URL if exists - e.g., https://linkedin.com/company/name]",
+        "youtube": "[Real YouTube URL if exists - e.g., https://youtube.com/@username]"
+      },
       "followers": [realistic follower/customer count based on typical market sizes],
       "engagement": [realistic engagement rate 1-8% based on industry standards],
       "strengths": ["[Real competitive advantage]", "[Actual market position]", "[Genuine operational strength]"],
